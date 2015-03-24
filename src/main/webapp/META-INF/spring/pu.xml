@@ -14,7 +14,9 @@ http://www.openspaces.org/schema/sla http://www.openspaces.org/schema/8.0/sla/op
     <context:annotation-config/>
     <os-core:giga-space-context />
 
-    <context:component-scan base-package="com.kblyumkin.userServices.spaces"/>
+    <bean id="userDao" class="com.kblyumkin.userServices.spaces.writer.UserDAO"/>
+
+    <context:component-scan base-package="com.kblyumkin.userServices"/>
 
     <os-events:annotation-support />
 
@@ -23,8 +25,8 @@ http://www.openspaces.org/schema/sla http://www.openspaces.org/schema/8.0/sla/op
 
     <os-sla:sla cluster-schema="partitioned-sync2backup"
                 number-of-instances="8"
-                number-of-backups="0"
-                max-instances-per-vm="1">
+                number-of-backups="1"
+                max-instances-per-vm="8">
     </os-sla:sla>
 
 

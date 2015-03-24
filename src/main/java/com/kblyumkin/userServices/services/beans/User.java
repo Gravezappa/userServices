@@ -1,4 +1,4 @@
-package com.kblyumkin.userServices.services;
+package com.kblyumkin.userServices.services.beans;
 
 import com.gigaspaces.annotation.pojo.SpaceId;
 import com.gigaspaces.annotation.pojo.SpaceIndex;
@@ -10,6 +10,7 @@ import java.io.Serializable;
 
 @XmlType(name="User", propOrder = {
         "id",
+        "parentId",
         "firstName",
         "lastName",
         "status",
@@ -18,6 +19,7 @@ import java.io.Serializable;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class User implements Serializable {
     private String id;
+    private String parentId;
     private String firstName;
     private String lastName;
     private Status status;
@@ -26,8 +28,9 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String id, String firstName, String lastName, Status status, long creationTime) {
+    public User(String id, String parentId, String firstName, String lastName, Status status, long creationTime) {
         this.id = id;
+        this.parentId = parentId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;
@@ -68,6 +71,15 @@ public class User implements Serializable {
     }
 
     @SpaceIndex
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    @SpaceIndex
     public long getCreationTime() {
         return creationTime;
     }
@@ -80,10 +92,11 @@ public class User implements Serializable {
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
+                ", parentId='" + parentId + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", status=" + status +
-                ", creationTime='" + creationTime + '\'' +
+                ", creationTime=" + creationTime +
                 '}';
     }
 

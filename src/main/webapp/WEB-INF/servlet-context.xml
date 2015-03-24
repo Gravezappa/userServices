@@ -16,7 +16,7 @@
 
 
     <bean id="userServiceImpl" class="com.kblyumkin.userServices.services.impl.UserServiceImpl"/>
-    <bean id="writer" class="com.kblyumkin.userServices.spaces.writer.UserWriter"/>
+    <bean id="userDao" class="com.kblyumkin.userServices.spaces.writer.UserDAO"/>
 
     <jaxws:endpoint id="userServiceEndpoint"
                     implementor="#userServiceImpl"

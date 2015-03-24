@@ -1,5 +1,7 @@
 package com.kblyumkin.userServices.services;
 
+import com.kblyumkin.userServices.services.beans.User;
+
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;

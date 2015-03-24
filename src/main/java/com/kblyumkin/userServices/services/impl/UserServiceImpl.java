@@ -1,8 +1,8 @@
 package com.kblyumkin.userServices.services.impl;
 
-import com.kblyumkin.userServices.services.User;
+import com.kblyumkin.userServices.services.beans.User;
 import com.kblyumkin.userServices.services.UserService;
-import com.kblyumkin.userServices.spaces.writer.UserWriter;
+import com.kblyumkin.userServices.spaces.writer.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.jws.WebService;
@@ -14,13 +14,16 @@ import javax.jws.WebService;
         wsdlLocation = "UserService.wsdl")
 public class UserServiceImpl implements UserService {
     @Autowired
-    UserWriter writer;
+    UserDAO userDao;
 
 
     @Override
     public String processUser(User user) {
-        System.out.println("User " + user + " has been written");
-    writer.writeUser(user);
+        if (User.Status.NEW.equals(user.getStatus())) {
+            userDao.writeUser(user);
+        } else {
+            userDao.update(user);
+        }
         return "ok";
     }
 }
