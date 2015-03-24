@@ -1,6 +1,7 @@
 package com.kblyumkin.userServices.services;
 
 import com.gigaspaces.annotation.pojo.SpaceId;
+import com.gigaspaces.annotation.pojo.SpaceIndex;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -12,31 +13,25 @@ import java.io.Serializable;
         "firstName",
         "lastName",
         "status",
-        "timeStamp"
+        "creationTime"
 })
 @XmlAccessorType(XmlAccessType.FIELD)
-/*@XmlRootElement(name="User")*/
 public class User implements Serializable {
-    /*@XmlElement(required = true)*/
     private String id;
-    /*@XmlElement(required = true)*/
     private String firstName;
-    /*@XmlElement(required = true)*/
     private String lastName;
-    /*@XmlElement(required = true)*/
     private Status status;
-    /*@XmlElement(required = true)*/
-    private String timeStamp;
+    private long creationTime;
 
     public User() {
     }
 
-    public User(String id, String firstName, String lastName, Status status, String timeStamp) {
+    public User(String id, String firstName, String lastName, Status status, long creationTime) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;
-        this.timeStamp = timeStamp;
+        this.creationTime = creationTime;
     }
 
     @SpaceId(autoGenerate = true)
@@ -72,12 +67,13 @@ public class User implements Serializable {
         this.status = status;
     }
 
-    public String getTimeStamp() {
-        return timeStamp;
+    @SpaceIndex
+    public long getCreationTime() {
+        return creationTime;
     }
 
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setCreationTime(long creationTime) {
+        this.creationTime = creationTime;
     }
 
     @Override
@@ -87,7 +83,7 @@ public class User implements Serializable {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", status=" + status +
-                ", timeStamp='" + timeStamp + '\'' +
+                ", creationTime='" + creationTime + '\'' +
                 '}';
     }
 

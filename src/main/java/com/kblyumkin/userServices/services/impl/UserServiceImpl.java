@@ -19,8 +19,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String processUser(User user) {
+        System.out.println("User " + user + " has been written");
     writer.writeUser(user);
-
         return "ok";
     }
 }

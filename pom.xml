@@ -13,6 +13,7 @@
         <java.version>1.7</java.version>
         <cxf.version>3.0.4</cxf.version>
         <spring.version>4.1.5.RELEASE</spring.version>
+        <gigaspaces.version>10.0.1-11800-RELEASE</gigaspaces.version>
     </properties>
 
     <dependencies>
@@ -48,13 +49,13 @@
             <artifactId>gs-runtime</artifactId>
             <groupId>com.gigaspaces</groupId>
             <scope>provided</scope>
-            <version>10.0.1-11800-RELEASE</version>
+            <version>${gigaspaces.version}</version>
         </dependency>
         <dependency>
             <artifactId>gs-openspaces</artifactId>
             <groupId>com.gigaspaces</groupId>
             <scope>provided</scope>
-            <version>10.0.1-11800-RELEASE</version>
+            <version>${gigaspaces.version}</version>
         </dependency>
 
 

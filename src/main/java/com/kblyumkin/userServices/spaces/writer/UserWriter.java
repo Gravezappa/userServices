@@ -12,6 +12,7 @@ public class UserWriter {
     public UserWriter() {}
 
     public void writeUser(User user) {
+        user.setCreationTime(System.currentTimeMillis());
         gigaspace.write(user);
     }
 }
