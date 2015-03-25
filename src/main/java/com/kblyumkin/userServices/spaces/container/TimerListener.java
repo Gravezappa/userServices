@@ -11,13 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @EventDriven @Polling
 public class TimerListener {
+    private final static String TEMPLATE_CONDITION = "parentId is null AND creationTime < ?";
+    private final static long TIME_TO_STORE        = 20000l;
+
     @Autowired
     UserDAO userDao;
 
     @DynamicEventTemplate
     SQLQuery<User> unprocessedExpiredData() {
-        long expired = System.currentTimeMillis() - 10000;
-        SQLQuery<User> dynamicTemplate = new SQLQuery<User>(User.class, "parentId is null AND creationTime < ?")
+        long expired = System.currentTimeMillis() - TIME_TO_STORE;
+        SQLQuery<User> dynamicTemplate = new SQLQuery<>(User.class, TEMPLATE_CONDITION)
                 .setParameter(1, expired);
         return dynamicTemplate;
     }
@@ -27,10 +30,10 @@ public class TimerListener {
         User lastEdited = userDao.getEdited(event);
         System.out.println("Last edited user was: " + lastEdited);
         if (!User.Status.REJECT.equals(lastEdited.getStatus())) {
-            System.out.println(lastEdited + "is sending to JMS");
+            System.out.println(lastEdited + " is sending to JMS");
         }
         userDao.remove(event);
-        System.out.println("User " + event + " removed");
+        System.out.println(event + " removed");
         return null;
     }
 }

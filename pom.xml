@@ -102,6 +102,7 @@
                             <artifactId>${project.artifactId}</artifactId>
                         </manifestEntries>
                     </archive>
+                    <warName>user-services</warName>
                 </configuration>
             </plugin>
 

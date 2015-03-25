@@ -21,12 +21,17 @@ public class UserDAO {
         gigaspace.write(user);
     }
 
+    public boolean isUserExists(User user) {
+        return gigaspace.read(new SQLQuery<User>(User.class, UPDATE_REJECT_REQUEST)
+                .setParameter(1, user.getFirstName())
+                .setParameter(2, user.getLastName())) != null;
+    }
+
     public void update(User user) {
         User parentUser = gigaspace.read(new SQLQuery<>(User.class, UPDATE_REJECT_REQUEST)
                 .setParameter(1, user.getFirstName())
                 .setParameter(2, user.getLastName()));
         user.setParentId(parentUser.getId());
-        System.out.println("Parent user found: " + parentUser);
         writeUser(user);
     }
 
