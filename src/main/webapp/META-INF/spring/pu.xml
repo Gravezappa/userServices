@@ -12,16 +12,8 @@ http://www.openspaces.org/schema/remoting http://www.openspaces.org/schema/8.0/r
 http://www.openspaces.org/schema/sla http://www.openspaces.org/schema/8.0/sla/openspaces-sla.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
-    <os-core:giga-space-context />
-
-    <bean id="userDao" class="com.kblyumkin.userServices.spaces.writer.UserDAO"/>
-
     <context:component-scan base-package="com.kblyumkin.userServices"/>
 
-    <os-events:annotation-support />
-
-    <os-core:space id="space" url="/./userSpace" />
-    <os-core:giga-space id="gigaspace" space="space" />
 
     <os-sla:sla cluster-schema="partitioned-sync2backup"
                 number-of-instances="2"
@@ -29,5 +21,5 @@ http://www.openspaces.org/schema/sla http://www.openspaces.org/schema/8.0/sla/op
                 max-instances-per-vm="4">
     </os-sla:sla>
 
-
+    <bean id="userDao" class="com.kblyumkin.userServices.spaces.writer.UserManager"/>
 </beans>

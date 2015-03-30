@@ -1,5 +1,6 @@
 package com.kblyumkin.userServices.services.beans;
 
+import com.gigaspaces.annotation.pojo.SpaceClass;
 import com.gigaspaces.annotation.pojo.SpaceId;
 import com.gigaspaces.annotation.pojo.SpaceIndex;
 
@@ -17,6 +18,7 @@ import java.io.Serializable;
         "creationTime"
 })
 @XmlAccessorType(XmlAccessType.FIELD)
+@SpaceClass
 public class User implements Serializable {
     private String id;
     private String parentId;

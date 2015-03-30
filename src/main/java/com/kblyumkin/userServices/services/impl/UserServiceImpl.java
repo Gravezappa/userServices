@@ -3,7 +3,7 @@ package com.kblyumkin.userServices.services.impl;
 import com.kblyumkin.userServices.services.beans.User;
 import com.kblyumkin.userServices.services.UserService;
 import com.kblyumkin.userServices.services.exceptions.UserFault;
-import com.kblyumkin.userServices.spaces.writer.UserDAO;
+import com.kblyumkin.userServices.spaces.writer.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.jws.WebService;
@@ -15,20 +15,21 @@ import javax.jws.WebService;
         wsdlLocation = "UserService.wsdl")
 public class UserServiceImpl implements UserService {
     @Autowired
-    UserDAO userDao;
+    UserManager userManager;
 
     @Override
     public User processUser(User user) throws UserFault {
+        user.setCreationTime(System.currentTimeMillis());
         if (User.Status.NEW.equals(user.getStatus())) {
-            if (userDao.isUserExists(user)) {
+            if (userManager.isExists(user)) {
                 throw new UserFault(user + " already exists");
             }
-            userDao.writeUser(user);
+            userManager.write(user);
         } else {
-            if (!userDao.isUserExists(user)) {
+            if (!userManager.isExists(user)) {
                 throw new UserFault(user + " not exists");
             }
-            userDao.update(user);
+            userManager.writeChild(user);
         }
         return user;
     }
